@@ -15,6 +15,8 @@ function setup() {
         speed: 4
       
     };
+    
+    fill(#1F1F1F1);
     // Create maze walls
       walls = [];
 
