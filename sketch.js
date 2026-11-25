@@ -9,21 +9,19 @@ function setup() {
     // Create player
      player = {
         x: 340,
-        y: 20,
+        y: 35,
         w: 40,
         h: 40,
         speed: 4
-      
-    };
-    
-    fill(#1F1F1F1);
+    }
     // Create maze walls
       walls = [];
 
     walls.push({ x: 10, y: 200, w: 5, h: 385 }); // Left Wall
 
     walls.push({ x: 160, y: 10, w: 300, h: 5 }); // Top Line
-    walls.push({ x: 150, y: 60, w: 5, h: 100 }); // Top Middle Line
+    walls.push({ x: 150, y: 150, w: 5, h: 100 }); // Top Middle Line
+     walls.push({ x:200, y: 50, w: 5, h: 85 });
     walls.push({ x: 190, y: 197, w: 185, h: 5 }); // Middle Line
 
     walls.push({ x: 285, y: 198, w: 5, h: 109 }); // Right Wall 02 
@@ -39,6 +37,7 @@ function setup() {
 /* DRAW LOOP REPEATS */
 function draw( ) {
      background(197, 155, 155);
+    let hitWall = false;
 
     if (!gameWon) {
         // =================================
@@ -59,6 +58,7 @@ function draw( ) {
         }
         if (touchingWall()) {
             player.x = previousX;
+            hitWall = true;
         }
 
         let previousY = player.y;
@@ -70,6 +70,7 @@ function draw( ) {
         }
         if (touchingWall()) {
             player.y = previousY;
+            hitWall = true;
         }
 
         // =================================
@@ -113,7 +114,11 @@ function draw( ) {
     }
 
     // Draw player
-    fill(100, 150, 255);
+    if (hitWall) {
+        fill(255, 0, 0);
+    } else {
+        fill(100, 100, 255);
+    }
     rect(player.x, player.y, player.w, player.h);
 
     // Draw Start and End
@@ -151,3 +156,4 @@ function touchingWall() {
     }
     return false;
 }
+ 
